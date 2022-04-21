@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Debug;
 
 namespace LevelMaze
 {
     [RequireComponent(typeof(CharacterController))]
     public class Player : MonoBehaviour
     {
-        public float speed = 5.0f;
+        public int keys;
+
+        public static float speed;
 
         CharacterController controller;
 
@@ -21,9 +24,12 @@ namespace LevelMaze
         void Start()
         {
             controller = GetComponent<CharacterController>();
+            KeyPanel.onPlayerTouchedPanel += onTouchPanel;
+
+            speed = 5f;
         }
 
-        protected virtual void UnitMove()
+        protected void UnitMove()
         {
             groundCheck = Physics.CheckSphere(groundObject.position, 0.3f, groundMask);
             if (groundCheck)
@@ -45,6 +51,25 @@ namespace LevelMaze
         void Update()
         {
             UnitMove();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "Key")
+            {
+                keys++;
+                Destroy(other.gameObject);
+                Log("destroy");
+            }
+        }
+
+        void onTouchPanel()
+        {
+            Log("touch");
+            if (keys == 4)
+            {
+                KeyPanel.hasKeys = true;
+            }
         }
     }
 }

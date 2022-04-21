@@ -8,7 +8,7 @@ namespace LevelMaze
     {
         float xRotation = 0f;
 
-        public float mouseS = 300f;
+        public float mouseS;
 
         public Transform playerBody;
 
@@ -18,6 +18,7 @@ namespace LevelMaze
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
+            mouseS = 100f;
         }
 
         // Update is called once per frame
