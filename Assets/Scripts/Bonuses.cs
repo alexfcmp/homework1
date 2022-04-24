@@ -11,8 +11,6 @@ namespace LevelMaze
 
         void Start()
         {
-            ResetBonuses(true);
-            ResetBonuses(false);
             GoodBonus.onGoodBonusTook += OnGoodBonusTook;
             BadBonus.onBadBonusTook += OnBadBonusTook;
 

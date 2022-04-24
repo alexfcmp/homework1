@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using static UnityEngine.Debug;
 
 namespace LevelMaze
@@ -21,6 +22,10 @@ namespace LevelMaze
         public Transform groundObject;
         public LayerMask groundMask;
 
+        public Animator cameraAnim;
+
+        public static UnityAction AudioEvent;
+
         void Start()
         {
             controller = GetComponent<CharacterController>();
@@ -39,6 +44,13 @@ namespace LevelMaze
             //движение на земле
             float x = Input.GetAxis("Horizontal");
             float z = Input.GetAxis("Vertical");
+
+            if (x != 0 || z != 0) 
+            {
+                cameraAnim.SetBool("isWalking", true);
+                AudioEvent.Invoke();
+            }
+            else { cameraAnim.SetBool("isWalking", false); }
 
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(speed * move * Time.deltaTime);

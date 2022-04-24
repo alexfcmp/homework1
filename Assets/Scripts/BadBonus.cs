@@ -11,7 +11,7 @@ namespace LevelMaze
 
         void SpeedLow()
         {
-            Player.speed = Random.Range(1, 5);
+            Player.speed = Random.Range(1, 3);
         }
         void OnTriggerEnter(Collider other)
         {

@@ -18,7 +18,6 @@ namespace LevelMaze
         void Start()
         {
             Cursor.lockState = CursorLockMode.Locked;
-            mouseS = 100f;
         }
 
         // Update is called once per frame
