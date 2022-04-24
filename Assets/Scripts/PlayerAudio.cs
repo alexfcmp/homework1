@@ -6,10 +6,11 @@ namespace LevelMaze
 {
     public class PlayerAudio : MonoBehaviour
     {
-        public AudioSource audioSource;
+        static AudioSource audioSource;
         public List<AudioClip> footSteps;
         void Start()
         {
+            audioSource = GetComponent<AudioSource>();
             StartCoroutine(ChangeAudioClip());
             Player.AudioEvent += OnPlayerWalk;
         }
@@ -21,6 +22,10 @@ namespace LevelMaze
             yield return new WaitForSeconds(1f);
         }
 
-        public void OnPlayerWalk() => audioSource.Play();
+        public static void OnPlayerWalk()
+        {
+            audioSource.Play();
+            Player.AudioEvent -= OnPlayerWalk;
+        }
     }
 }

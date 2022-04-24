@@ -50,7 +50,11 @@ namespace LevelMaze
                 cameraAnim.SetBool("isWalking", true);
                 AudioEvent.Invoke();
             }
-            else { cameraAnim.SetBool("isWalking", false); }
+            else 
+            { 
+                cameraAnim.SetBool("isWalking", false);
+                AudioEvent += PlayerAudio.OnPlayerWalk;
+            }
 
             Vector3 move = transform.right * x + transform.forward * z;
             controller.Move(speed * move * Time.deltaTime);
