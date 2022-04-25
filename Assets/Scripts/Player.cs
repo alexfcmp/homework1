@@ -24,7 +24,7 @@ namespace LevelMaze
 
         public Animator cameraAnim;
 
-        public static UnityAction AudioEvent;
+        public GameObject AudioPlayer;
 
         void Start()
         {
@@ -48,12 +48,12 @@ namespace LevelMaze
             if (x != 0 || z != 0) 
             {
                 cameraAnim.SetBool("isWalking", true);
-                AudioEvent.Invoke();
+                AudioPlayer.SetActive(true);
             }
             else 
             { 
                 cameraAnim.SetBool("isWalking", false);
-                AudioEvent += PlayerAudio.OnPlayerWalk;
+                AudioPlayer.SetActive(false);
             }
 
             Vector3 move = transform.right * x + transform.forward * z;
