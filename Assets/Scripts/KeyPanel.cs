@@ -8,8 +8,8 @@ namespace LevelMaze
 {
     public class KeyPanel : MonoBehaviour
     {
-        public GameObject door;
-        public static bool hasKeys;
+        [SerializeField] GameObject door;
+        internal static bool hasKeys;
         public static UnityAction onPlayerTouchedPanel;
 
         void OnCollisionEnter(Collision collision)

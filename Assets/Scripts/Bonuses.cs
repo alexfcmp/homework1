@@ -4,18 +4,24 @@ using UnityEngine;
 
 namespace LevelMaze
 {
-    public class Bonuses : MonoBehaviour
+    public sealed class Bonuses : MonoBehaviour
     {
-        public List<BadBonus> badBonuses;
-        public List<GoodBonus> goodBonuses;
+        [SerializeField] List<BadBonus> badBonuses;
+        [SerializeField] List<GoodBonus> goodBonuses;
 
         void Start()
         {
-            GoodBonus.onGoodBonusTook += OnGoodBonusTook;
-            BadBonus.onBadBonusTook += OnBadBonusTook;
+            //для примера возможной ошибки возьму этот кусок кода
+            try
+            {
+                GoodBonus.onGoodBonusTook += OnGoodBonusTook;
+                BadBonus.onBadBonusTook += OnBadBonusTook;
 
-            OnGoodBonusTook();
-            OnBadBonusTook();
+                if (GoodBonus.onGoodBonusTook == null || BadBonus.onBadBonusTook == null) throw new MyNullException("Эти эвенты не могут быть null");
+
+                OnGoodBonusTook();
+                OnBadBonusTook();
+            } catch (MyNullException ex) { Debug.LogException(ex); }
         }
 
         void ResetBonuses(bool isBadBonus)

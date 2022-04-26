@@ -7,24 +7,24 @@ using static UnityEngine.Debug;
 namespace LevelMaze
 {
     [RequireComponent(typeof(CharacterController))]
-    public class Player : MonoBehaviour
+    public sealed class Player : MonoBehaviour
     {
-        public int keys;
+        int keys;
 
-        public static float speed;
+        internal static float speed;
 
         CharacterController controller;
 
-        public float gravity = -9.81f;
-        public Vector3 velocity;
+        [SerializeField] float gravity = -9.81f;
+        Vector3 velocity;
 
         bool groundCheck;
-        public Transform groundObject;
-        public LayerMask groundMask;
+        [SerializeField] Transform groundObject;
+        [SerializeField] LayerMask groundMask;
 
-        public Animator cameraAnim;
+        [SerializeField] Animator cameraAnim;
 
-        public GameObject AudioPlayer;
+        [SerializeField] GameObject AudioPlayer;
 
         void Start()
         {
@@ -34,7 +34,7 @@ namespace LevelMaze
             speed = 5f;
         }
 
-        protected void UnitMove()
+        void UnitMove()
         {
             groundCheck = Physics.CheckSphere(groundObject.position, 0.3f, groundMask);
             if (groundCheck)
@@ -48,12 +48,14 @@ namespace LevelMaze
             if (x != 0 || z != 0) 
             {
                 cameraAnim.SetBool("isWalking", true);
-                AudioPlayer.SetActive(true);
+                //код не работает
+                //AudioPlayer.SetActive(true);
             }
             else 
             { 
                 cameraAnim.SetBool("isWalking", false);
-                AudioPlayer.SetActive(false);
+                //код не работает
+                //AudioPlayer.SetActive(false);
             }
 
             Vector3 move = transform.right * x + transform.forward * z;
@@ -69,7 +71,7 @@ namespace LevelMaze
             UnitMove();
         }
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if (other.tag == "Key")
             {

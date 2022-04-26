@@ -4,13 +4,15 @@ using UnityEngine;
 
 namespace LevelMaze
 {
-    public class Camera : MonoBehaviour
+    public sealed class Camera : MonoBehaviour
     {
         float xRotation = 0f;
 
-        public float mouseS;
+        [Header("MouseSens")]
 
-        public Transform playerBody;
+        [SerializeField] float mouseS;
+
+        [SerializeField] Transform playerBody;
 
         float mouseX;
         float mouseY;
@@ -20,7 +22,6 @@ namespace LevelMaze
             Cursor.lockState = CursorLockMode.Locked;
         }
 
-        // Update is called once per frame
         void Update()
         {
             mouseX = Input.GetAxis("Mouse X") * mouseS * Time.deltaTime;
@@ -33,5 +34,4 @@ namespace LevelMaze
             playerBody.Rotate(Vector3.up * mouseX);
         }
     }
-
 }

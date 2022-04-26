@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 namespace LevelMaze
 {
-    public class GoodBonus : MonoBehaviour
+    public sealed class GoodBonus : MonoBehaviour
     {
-        public static UnityAction onGoodBonusTook;
+        internal static UnityAction onGoodBonusTook;
 
         void SpeedHigh()
         {

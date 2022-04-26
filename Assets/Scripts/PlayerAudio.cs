@@ -4,10 +4,10 @@ using UnityEngine;
 
 namespace LevelMaze
 {
-    public class PlayerAudio : MonoBehaviour
+    public sealed class PlayerAudio : MonoBehaviour
     {
-        public AudioSource audioSource;
-        public List<AudioClip> footSteps;
+        [SerializeField] AudioSource audioSource;
+        [SerializeField] List<AudioClip> footSteps;
         void Start()
         {
             StartCoroutine(ChangeAudioClip());
