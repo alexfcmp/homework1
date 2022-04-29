@@ -25,11 +25,19 @@ namespace LevelMaze
         [SerializeField] Animator cameraAnim;
 
         [SerializeField] GameObject AudioPlayer;
+        [SerializeField] AudioSource audioSource;
+        [SerializeField] List<AudioClip> footSteps;
+
+        internal static UnityAction onPlayerInZone;
 
         void Start()
         {
             controller = GetComponent<CharacterController>();
             KeyPanel.onPlayerTouchedPanel += onTouchPanel;
+
+            WinController.onPlayerWin += OnPlayerWin;
+
+            StartCoroutine(ChangeAudioClip());
 
             speed = 5f;
         }
@@ -48,14 +56,12 @@ namespace LevelMaze
             if (x != 0 || z != 0) 
             {
                 cameraAnim.SetBool("isWalking", true);
-                //код не работает
-                //AudioPlayer.SetActive(true);
+                AudioPlayer.SetActive(true);
             }
             else 
             { 
                 cameraAnim.SetBool("isWalking", false);
-                //код не работает
-                //AudioPlayer.SetActive(false);
+                AudioPlayer.SetActive(false);
             }
 
             Vector3 move = transform.right * x + transform.forward * z;
@@ -69,6 +75,7 @@ namespace LevelMaze
         void Update()
         {
             UnitMove();
+            if (!audioSource.isPlaying) { audioSource.Play(); }
         }
 
         void OnTriggerEnter(Collider other)
@@ -88,6 +95,17 @@ namespace LevelMaze
             {
                 KeyPanel.hasKeys = true;
             }
+        }
+        void OnPlayerWin()
+        {
+            speed = 0f;
+        }
+
+        IEnumerator ChangeAudioClip()
+        {
+            audioSource.clip = footSteps[Random.Range(0, footSteps.Count - 1)];
+            Log("coroutine audio");
+            yield return new WaitForSeconds(0.7f);
         }
     }
 }

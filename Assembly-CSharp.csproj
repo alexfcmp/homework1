@@ -59,12 +59,13 @@
     <Compile Include="Assets\Scripts\Bonuses.cs" />
     <Compile Include="Assets\Scripts\Camera.cs" />
     <Compile Include="Assets\Scripts\GoodBonus.cs" />
-    <Compile Include="Assets\Scripts\PlayerAudio.cs" />
+    <Compile Include="Assets\Scripts\UIController.cs" />
+    <Compile Include="Assets\Scripts\WinController.cs" />
     <Compile Include="Assets\Scripts\BadBonus.cs" />
     <Compile Include="Assets\Scripts\KeyPanel.cs" />
     <Compile Include="Assets\Scripts\IMGUI_set.cs" />
-    <Compile Include="Assets\Scripts\Player.cs" />
     <Compile Include="Assets\Scripts\MyNullException.cs" />
+    <Compile Include="Assets\Scripts\Player.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
