@@ -1,18 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class UIController : MonoBehaviour
+namespace LevelMaze
 {
-    // Start is called before the first frame update
-    void Start()
+    public class UIController : MonoBehaviour
     {
-        
-    }
+        Text keyText;
+        GameObject winText;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        void Start()
+        {
+            Player.onPlayerCollectKey += OnKeyCollected;
+            WinController.onPlayerWin += OnPlayerWon;
+        }
+
+        void OnKeyCollected() => keyText.text = $"{Player.keys} keys left";
+
+        void OnPlayerWon() => winText.SetActive(true);
     }
 }

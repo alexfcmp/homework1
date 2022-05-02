@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\IMGUI_set.cs" />
     <Compile Include="Assets\Scripts\MyNullException.cs" />
     <Compile Include="Assets\Scripts\Player.cs" />
+    <Compile Include="Assets\Scripts\BaseBonus.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

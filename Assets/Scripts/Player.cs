@@ -9,7 +9,7 @@ namespace LevelMaze
     [RequireComponent(typeof(CharacterController))]
     public sealed class Player : MonoBehaviour
     {
-        int keys;
+        internal static int keys { get; private set; }
 
         internal static float speed;
 
@@ -28,6 +28,7 @@ namespace LevelMaze
         [SerializeField] List<AudioClip> footSteps;
 
         internal static UnityAction onPlayerInZone;
+        internal static UnityAction onPlayerCollectKey;
 
         void Start()
         {
@@ -39,6 +40,7 @@ namespace LevelMaze
             StartCoroutine(ChangeAudioClip());
 
             speed = 5f;
+            keys = 0;
         }
 
         void UnitMove()
@@ -55,7 +57,11 @@ namespace LevelMaze
             if (x != 0 || z != 0) 
             {
                 cameraAnim.SetBool("isWalking", true);
-                if (!audioSource.isPlaying) { audioSource.Play(); }
+                if (!audioSource.isPlaying) 
+                {
+                    audioSource.clip = footSteps[Random.Range(0, footSteps.Count - 1)];
+                    audioSource.Play();
+                }
             }
             else 
             { 
@@ -73,7 +79,6 @@ namespace LevelMaze
         void Update()
         {
             UnitMove();
-            if (!audioSource.isPlaying) { audioSource.Play(); }
         }
 
         void OnTriggerEnter(Collider other)
@@ -81,6 +86,7 @@ namespace LevelMaze
             if (other.tag == "Key")
             {
                 keys++;
+                onPlayerCollectKey.Invoke();
                 Destroy(other.gameObject);
                 Log("destroy");
             }

@@ -5,17 +5,15 @@ using UnityEngine.Events;
 
 namespace LevelMaze
 {
-    public sealed class GoodBonus : MonoBehaviour
+    public sealed class GoodBonus : BaseBonus
     {
         internal static UnityAction onGoodBonusTook;
 
-        void SpeedHigh()
-        {
-            Player.speed = Random.Range(8, 15);
-        }
+        protected override void ChangeSpeed() => Player.speed = Random.Range(8, 15);
+
         void OnTriggerEnter(Collider other)
         {
-            SpeedHigh();
+            ChangeSpeed();
             onGoodBonusTook.Invoke();
         }
     }
