@@ -24,7 +24,6 @@ namespace LevelMaze
 
         [SerializeField] Animator cameraAnim;
 
-        [SerializeField] GameObject AudioPlayer;
         [SerializeField] AudioSource audioSource;
         [SerializeField] List<AudioClip> footSteps;
 
@@ -56,12 +55,11 @@ namespace LevelMaze
             if (x != 0 || z != 0) 
             {
                 cameraAnim.SetBool("isWalking", true);
-                AudioPlayer.SetActive(true);
+                if (!audioSource.isPlaying) { audioSource.Play(); }
             }
             else 
             { 
                 cameraAnim.SetBool("isWalking", false);
-                AudioPlayer.SetActive(false);
             }
 
             Vector3 move = transform.right * x + transform.forward * z;
