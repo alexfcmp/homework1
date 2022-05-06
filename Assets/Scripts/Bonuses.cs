@@ -17,7 +17,7 @@ namespace LevelMaze
                 GoodBonus.onGoodBonusTook += OnGoodBonusTook;
                 BadBonus.onBadBonusTook += OnBadBonusTook;
 
-                if (GoodBonus.onGoodBonusTook == null || BadBonus.onBadBonusTook == null) throw new MyNullException("Эти эвенты не могут быть null");
+                if (GoodBonus.onGoodBonusTook == null || BadBonus.onBadBonusTook == null) throw new MyNullException("Эти ивенты не могут быть null");
 
                 OnGoodBonusTook();
                 OnBadBonusTook();

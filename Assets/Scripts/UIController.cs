@@ -2,22 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace LevelMaze
 {
     public class UIController : MonoBehaviour
     {
-        Text keyText;
-        GameObject winText;
+        [SerializeField] Text keyText;
+        [SerializeField] GameObject winText;
 
         void Start()
         {
+            
             Player.onPlayerCollectKey += OnKeyCollected;
             WinController.onPlayerWin += OnPlayerWon;
         }
 
-        void OnKeyCollected() => keyText.text = $"{Player.keys} keys left";
+        void OnKeyCollected() => keyText.text = $"{4-Player.keys} keys left";
 
         void OnPlayerWon() => winText.SetActive(true);
+
+        public void OnPlayerClicked() => SceneManager.LoadScene(0);
     }
 }

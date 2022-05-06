@@ -8,9 +8,6 @@ namespace LevelMaze
     public class WinController : MonoBehaviour
     {
         internal static UnityAction onPlayerWin;
-        void OnTriggerEnter(Collider other)
-        {
-            onPlayerWin.Invoke();
-        }
+        void OnTriggerEnter(Collider other) => onPlayerWin.Invoke();
     }
 }

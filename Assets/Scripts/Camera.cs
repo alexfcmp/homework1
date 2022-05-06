@@ -32,6 +32,8 @@ namespace LevelMaze
 
             transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
             playerBody.Rotate(Vector3.up * mouseX);
+            if (Input.GetKey(KeyCode.G)) Cursor.lockState = CursorLockMode.None;
+            else { Cursor.lockState = CursorLockMode.Locked; }
         }
     }
 }

@@ -37,8 +37,6 @@ namespace LevelMaze
 
             WinController.onPlayerWin += OnPlayerWin;
 
-            StartCoroutine(ChangeAudioClip());
-
             speed = 5f;
             keys = 0;
         }
@@ -100,16 +98,10 @@ namespace LevelMaze
                 KeyPanel.hasKeys = true;
             }
         }
+
         void OnPlayerWin()
         {
             speed = 0f;
-        }
-
-        IEnumerator ChangeAudioClip()
-        {
-            audioSource.clip = footSteps[Random.Range(0, footSteps.Count - 1)];
-            Log("coroutine audio");
-            yield return new WaitForSeconds(0.7f);
         }
     }
 }
