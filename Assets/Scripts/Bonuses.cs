@@ -53,5 +53,10 @@ namespace LevelMaze
             goodBonuses[Random.Range(0, goodBonuses.Count-1)].gameObject.SetActive(true);
             //возможно повторение прошлого индекса
         }
+        void OnDestroy()
+        {
+            GoodBonus.onGoodBonusTook -= OnGoodBonusTook;
+            BadBonus.onBadBonusTook -= OnBadBonusTook;
+        }
     }
 }

@@ -22,6 +22,11 @@ namespace LevelMaze
 
         void OnPlayerWon() => winText.SetActive(true);
 
-        public void OnPlayerClicked() => SceneManager.LoadScene(0);
+        public void OnPlayerClicked()
+        {
+            Player.onPlayerCollectKey -= OnKeyCollected;
+            WinController.onPlayerWin -= OnPlayerWon;
+            SceneManager.LoadScene(0);
+        }
     }
 }
